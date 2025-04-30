@@ -58,16 +58,30 @@ function parseCSVData(csv) {
 function renderTeams(teams) {
   const topContainer = document.getElementById("top-teams");
   const topTeams = teams.slice(0, 3);
-
-  const displayOrder = [0, 2, 1];
-
-  topContainer.innerHTML = displayOrder.map(position => {
+  
+  // Reorder for display: [2nd, 1st, 3rd] to show as [left, center, right]
+  const podiumOrder = [1, 0, 2]; // Indexes for 2nd, 1st, 3rd place positions
+  
+  topContainer.innerHTML = podiumOrder.map((position, displayIndex) => {
     const team = topTeams[position];
     if (!team) return '';
-
+    
+    // Determine placement class and rank text based on original position
+    let placeClass, rankText;
+    if (position === 0) { // Original 1st place
+      placeClass = 'first-place';
+      rankText = '1st';
+    } else if (position === 1) { // Original 2nd place
+      placeClass = 'second-place';
+      rankText = '2nd';
+    } else { // Original 3rd place
+      placeClass = 'third-place';
+      rankText = '3rd';
+    }
+  
     return `
-      <div class="team-card ${position === 0 ? 'second-place' : position === 1 ? 'first-place' : 'third-place'}">
-        <div class="rank-badge">${position === 0 ? '2nd' : position === 1 ? '1st' : '3rd'}</div>
+      <div class="team-card ${placeClass}">
+        <div class="rank-badge">${rankText}</div>
         <h3>${team.name}</h3>
         <p>Wins: ${team.wins}</p>
         <p>Points: ${team.points}</p>
