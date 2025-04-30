@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VAIL - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-brand">
+      <img src="images/VAIL_ProfilePicture.png" class="logo-img" alt="VAIL Logo">
+      <span class="logo-text">VAIL VML</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#video">Home</a></li>
+        <li><a href="#about">About VML</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#teams">Teams</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Video Section -->
+  <section id="video" class="section video-section">
+    <div class="video-box">
+      <video autoplay muted loop playsinline>
+        <source src="videos/VAIL-AppLabLaunchTrailer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- About VML Section -->
+  <section id="about" class="section">
+    <h2>About VML</h2>
+    <p>The Vail Minor League (VML) is a competitive environment designed to showcase rising talent, fuel rivalry, and elevate the experience of tactical shooters through the world of VAIL.</p>
+  </section>
+
+  <!-- Media Section -->
+  <section id="media" class="section">
+    <h2>Media Gallery</h2>
+    <div class="gallery">
+      <div class="media-item">Image 1</div>
+      <div class="media-item">Image 2</div>
+      <div class="media-item">Image 3</div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section id="news" class="section">
+    <h2>Latest News</h2>
+    <div class="news-container">
+      <div class="news-card">
+        <h3>Season</h3>
+        <p>The first season of VML has officially begun. Join now and prove your skills!</p>
+      </div>
+      <div class="news-card">
+        <h3>Patch Notes 1.0</h3>
+        <p>New weapons, maps, and performance improvements in the latest update.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teams Section -->
+  <section id="teams" class="section">
+    <h2>Teams Leaderboard</h2>
+
+    <div id="top-teams" class="teams-container"></div>
+
+    <h3 style="margin-top: 40px;">Leaderboard</h3>
+    <table id="leaderboard" class="leaderboard-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>MMR</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 VAIL. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
