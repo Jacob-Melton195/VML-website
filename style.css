@@ -222,3 +222,211 @@ footer {
   color: #ffffff;
   text-align: center;
 }
+
+/* Add these new styles to your existing CSS */
+
+/* Top teams container */
+#top-teams {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  margin: 40px 0;
+  min-height: 300px;
+}
+
+/* Team card base styles (keep existing .team-card styles) */
+.team-card {
+  position: relative;
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+/* First place styling - center position */
+.team-card.first-place {
+  height: 220px;
+  order: 2;
+  transform: translateY(-30px);
+  border-color: #FFD700; /* Gold */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Second place styling - left position */
+.team-card.second-place {
+  height: 180px;
+  order: 1;
+  border-color: #C0C0C0; /* Silver */
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+}
+
+/* Third place styling - right position */
+.team-card.third-place {
+  height: 160px;
+  order: 3;
+  border-color: #CD7F32; /* Bronze */
+  box-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+}
+
+/* Rank badge */
+.rank-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid;
+}
+
+.team-card.first-place .rank-badge {
+  background: #FFD700; /* Gold */
+  color: #000;
+  border-color: #FFD700;
+  transition: transform 0.3s ease;
+}
+
+.team-card.second-place .rank-badge {
+  background: #C0C0C0; /* Silver */
+  color: #000;
+  border-color: #C0C0C0;
+  transition: transform 0.3s ease;
+}
+
+.team-card.third-place .rank-badge {
+  background: #CD7F32; /* Bronze */
+  color: #000;
+  border-color: #CD7F32;
+}
+
+/* Adjust the team-mmr style for podium */
+.team-card .team-mmr {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #00FF00; /* Bright green to match your theme */
+}
+/* Add these new styles at the end of your existing CSS */
+
+/* Top teams container */
+#top-teams {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  margin: 40px 0;
+  min-height: 300px;
+}
+
+/* Team card base styles - modified to work with podium */
+.team-card {
+  position: relative;
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.1);
+}
+
+/* First place styling - center position */
+.team-card.first-place {
+  height: 220px;
+  order: 2;
+  transform: translateY(-30px);
+  border-color: #FFD700; /* Gold */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Second place styling - left position */
+.team-card.second-place {
+  height: 180px;
+  order: 1;
+  border-color: #C0C0C0; /* Silver */
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+}
+
+/* Third place styling - right position */
+.team-card.third-place {
+  height: 160px;
+  order: 3;
+  border-color: #CD7F32; /* Bronze */
+  box-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+}
+
+/* Rank badge */
+.rank-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid;
+}
+
+.team-card.first-place .rank-badge {
+  background: #FFD700; /* Gold */
+  color: #000;
+  border-color: #FFD700;
+}
+
+.team-card.second-place .rank-badge {
+  background: #C0C0C0; /* Silver */
+  color: #000;
+  border-color: #C0C0C0;
+}
+
+.team-card.third-place .rank-badge {
+  background: #CD7F32; /* Bronze */
+  color: #000;
+  border-color: #CD7F32;
+}
+
+/* Adjust the team-mmr style for podium */
+.team-card .team-mmr {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #00FF00; /* Bright green to match your theme */
+}
+
+/* Maintain hover effects for all team cards */
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #ffffff;
+}
+
+/* Special hover effects for podium positions */
+.team-card.first-place:hover {
+  transform: translateY(-35px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.team-card.second-place:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+}
+
+.team-card.third-place:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 15px rgba(205, 127, 50, 0.5);
+}
