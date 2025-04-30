@@ -16,82 +16,50 @@ async function fetchTeamsData() {
     showErrorUI();
   }
 }
-function parseCSVData(csv) {
-  const lines = csv.split('\n').filter(line => line.trim() !== '');
-  
-  const headerRow = lines.find(line => 
-    line.includes('Column 1') || 
-    line.includes('Points') || 
-    line.includes('Match Wins')
-  );
-  
-  if (!headerRow) return [];
-  
-  const headerIndex = lines.indexOf(headerRow);
-  const dataRows = lines.slice(headerIndex + 1);
-  
-  return dataRows
-    .map(row => {
-      const columns = row.split(',');
-      
-   
-      if (columns.length < 5 || 
-          columns[0].trim() === '' || 
-          isNaN(columns[4]) || 
-          columns[0].includes('=') || 
-          columns[0].includes('Formula') || 
-          columns[0].includes('Last Updated')) { 
-        return null;
-      }
-      
-      return {
-        name: columns[0].trim(),
-        wins: parseInt(columns[3]) || 0,
-        losses: 'N/A', 
-        points: parseInt(columns[1]) || 0, 
-        mmr: parseInt(columns[4]) || 0
-      };
-    })
-    .filter(team => team !== null);
-}
 
 function renderTeams(teams) {
+  const sortedTeams = [...teams].sort((a, b) => b.mmr - a.mmr);
+
   const topContainer = document.getElementById("top-teams");
-  const topTeams = teams.slice(0, 3);
-  
-  // Reorder for display: [2nd, 1st, 3rd] to show as [left, center, right]
-  const podiumOrder = [1, 0, 2]; // Indexes for 2nd, 1st, 3rd place positions
-  
-  topContainer.innerHTML = podiumOrder.map((position, displayIndex) => {
-    const team = topTeams[position];
-    if (!team) return '';
-    
-    // Determine placement class and rank text based on original position
-    let placeClass, rankText;
-    if (position === 0) { // Original 1st place
-      placeClass = 'first-place';
-      rankText = '1st';
-    } else if (position === 1) { // Original 2nd place
-      placeClass = 'second-place';
-      rankText = '2nd';
-    } else { // Original 3rd place
-      placeClass = 'third-place';
-      rankText = '3rd';
-    }
-  
-    return `
-      <div class="team-card ${placeClass}">
-        <div class="rank-badge">${rankText}</div>
-        <h3>${team.name}</h3>
-        <p>Wins: ${team.wins}</p>
-        <p>Points: ${team.points}</p>
-        <div class="team-mmr">MMR: ${team.mmr}</div>
+  const [firstPlace, secondPlace, thirdPlace] = sortedTeams.slice(0, 3);
+
+  topContainer.innerHTML = `
+    <!-- Second Place (Left) -->
+    ${secondPlace ? `
+      <div class="team-card second-place">
+        <div class="rank-badge">2nd</div>
+        <h3>${secondPlace.name}</h3>
+        <p>Wins: ${secondPlace.wins}</p>
+        <p>Points: ${secondPlace.points}</p>
+        <div class="team-mmr">MMR: ${secondPlace.mmr}</div>
       </div>
-    `;
-  }).join('');
+    ` : ''}
+    
+    <!-- First Place (Center) -->
+    ${firstPlace ? `
+      <div class="team-card first-place">
+        <div class="rank-badge">1st</div>
+        <h3>${firstPlace.name}</h3>
+        <p>Wins: ${firstPlace.wins}</p>
+        <p>Points: ${firstPlace.points}</p>
+        <div class="team-mmr">MMR: ${firstPlace.mmr}</div>
+      </div>
+    ` : ''}
+    
+    <!-- Third Place (Right) -->
+    ${thirdPlace ? `
+      <div class="team-card third-place">
+        <div class="rank-badge">3rd</div>
+        <h3>${thirdPlace.name}</h3>
+        <p>Wins: ${thirdPlace.wins}</p>
+        <p>Points: ${thirdPlace.points}</p>
+        <div class="team-mmr">MMR: ${thirdPlace.mmr}</div>
+      </div>
+    ` : ''}
+  `;
 
   const tableBody = document.querySelector("#leaderboard tbody");
-  tableBody.innerHTML = teams.map((team, index) => `
+  tableBody.innerHTML = sortedTeams.map((team, index) => `
     <tr>
       <td>${index + 1}</td>
       <td>${team.name}</td>
@@ -118,24 +86,5 @@ function showErrorUI() {
     </tr>
   `;
 }
-
-const errorStyles = document.createElement('style');
-errorStyles.textContent = `
-  .error-message {
-    color: #ff5555;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ff5555;
-    border-radius: 8px;
-    margin: 20px auto;
-    max-width: 500px;
-  }
-  .error-cell {
-    color: #ff5555;
-    text-align: center;
-    padding: 20px;
-  }
-`;
-document.head.appendChild(errorStyles);
 
 document.addEventListener('DOMContentLoaded', fetchTeamsData);
