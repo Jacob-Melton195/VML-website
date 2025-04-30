@@ -19,7 +19,6 @@ async function fetchTeamsData() {
 function parseCSVData(csv) {
   const lines = csv.split('\n').filter(line => line.trim() !== '');
   
-  // Find the header row
   const headerRow = lines.find(line => 
     line.includes('Column 1') || 
     line.includes('Points') || 
@@ -35,21 +34,21 @@ function parseCSVData(csv) {
     .map(row => {
       const columns = row.split(',');
       
-      // Skip rows that are not team data
+   
       if (columns.length < 5 || 
           columns[0].trim() === '' || 
-          isNaN(columns[4]) || // MMR should be a number
-          columns[0].includes('=') || // Skip ND=Not Decided
-          columns[0].includes('Formula') || // Skip formula rows
-          columns[0].includes('Last Updated')) { // Skip date row
+          isNaN(columns[4]) || 
+          columns[0].includes('=') || 
+          columns[0].includes('Formula') || 
+          columns[0].includes('Last Updated')) { 
         return null;
       }
       
       return {
         name: columns[0].trim(),
         wins: parseInt(columns[3]) || 0,
-        losses: 'N/A', // Default value since sheet doesn't track losses
-        points: parseInt(columns[1]) || 0, // Added points from column 2
+        losses: 'N/A', 
+        points: parseInt(columns[1]) || 0, 
         mmr: parseInt(columns[4]) || 0
       };
     })
@@ -57,28 +56,18 @@ function parseCSVData(csv) {
 }
 
 function renderTeams(teams) {
-  // Sort by MMR descending
-  teams.sort((a, b) => b.mmr - a.mmr);
-  
-  // Update top teams section with podium layout
   const topContainer = document.getElementById("top-teams");
   const topTeams = teams.slice(0, 3);
-  
-  // Reorder for display: [2nd, 1st, 3rd]
-  const podiumOrder = [1, 0, 2]; // Indexes for 2nd, 1st, 3rd place
-  
-  topContainer.innerHTML = podiumOrder.map(position => {
+
+  const displayOrder = [0, 2, 1];
+
+  topContainer.innerHTML = displayOrder.map(position => {
     const team = topTeams[position];
     if (!team) return '';
-    
-    const placeClass = position === 1 ? 'first-place' : 
-                      position === 0 ? 'second-place' : 'third-place';
-    const placeText = position === 1 ? '1st' : 
-                      position === 0 ? '2nd' : '3rd';
-    
+
     return `
-      <div class="team-card ${placeClass}">
-        <div class="rank-badge">${placeText}</div>
+      <div class="team-card ${position === 0 ? 'second-place' : position === 1 ? 'first-place' : 'third-place'}">
+        <div class="rank-badge">${position === 0 ? '2nd' : position === 1 ? '1st' : '3rd'}</div>
         <h3>${team.name}</h3>
         <p>Wins: ${team.wins}</p>
         <p>Points: ${team.points}</p>
@@ -86,8 +75,7 @@ function renderTeams(teams) {
       </div>
     `;
   }).join('');
-  
-  // Update leaderboard table (now includes points column)
+
   const tableBody = document.querySelector("#leaderboard tbody");
   tableBody.innerHTML = teams.map((team, index) => `
     <tr>
@@ -117,7 +105,6 @@ function showErrorUI() {
   `;
 }
 
-// Add some basic CSS for error states
 const errorStyles = document.createElement('style');
 errorStyles.textContent = `
   .error-message {
@@ -137,5 +124,4 @@ errorStyles.textContent = `
 `;
 document.head.appendChild(errorStyles);
 
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', fetchTeamsData);
