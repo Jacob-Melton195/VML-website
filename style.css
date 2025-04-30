@@ -7,7 +7,7 @@
 
 body {
   background-color: #000000;
-  color: #00FF00;
+  color: #ffffff;
   line-height: 1.6;
 }
 
@@ -17,7 +17,7 @@ header {
   align-items: center;
   padding: 20px 50px;
   background-color: #000;
-  border-bottom: 1px solid #00FF00;
+  border-bottom: 1px solid #ffffff;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -111,7 +111,7 @@ h2 {
   width: 200px;
   height: 120px;
   background-color: #111;
-  border: 1px solid #00FF00;
+  border: 1px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,7 +126,7 @@ h2 {
 
 .news-card {
   background-color: #111;
-  border: 1px solid #00FF00;
+  border: 1px solid #ffffff;
   padding: 20px;
   width: 300px;
 }
@@ -145,14 +145,14 @@ h2 {
   width: 100%;
   padding: 10px;
   background-color: #111;
-  border: 1px solid #00FF00;
-  color: #00FF00;
+  border: 1px solid #ffffff;
+  color: #ffffff;
 }
 
 .contact-form button {
   padding: 10px 20px;
   border: none;
-  background-color: #00FF00;
+  background-color: #ffffff;
   color: #000;
   font-weight: bold;
   cursor: pointer;
@@ -166,7 +166,7 @@ h2 {
 footer {
   text-align: center;
   padding: 30px;
-  border-top: 1px solid #00FF00;
+  border-top: 1px solid #ffffff;
 }
 
 .teams-container {
@@ -179,7 +179,7 @@ footer {
 
 .team-card {
   background-color: #111;
-  border: 1px solid #00FF00;
+  border: 1px solid #ffffff;
   border-radius: 10px;
   padding: 20px;
   width: 250px;
@@ -190,7 +190,7 @@ footer {
 
 .team-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 15px #00FF00;
+  box-shadow: 0 0 15px #ffffff;
 }
 
 .team-logo {
@@ -202,7 +202,7 @@ footer {
 
 .team-mmr {
   font-size: 16px;
-  color: #00FF00;
+  color: #ffffff;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -213,12 +213,12 @@ footer {
   margin: 0 auto;
   border-collapse: collapse;
   background-color: #111;
-  border: 1px solid #00FF00;
+  border: 1px solid #ffffff;
 }
 
 .leaderboard-table th, .leaderboard-table td {
   padding: 12px;
-  border: 1px solid #00FF00;
-  color: #00FF00;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   text-align: center;
 }
