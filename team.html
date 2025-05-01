@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Details - VAIL VML</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    .no-data-message {
+      padding: 20px;
+      text-align: center;
+      color: #888;
+      font-style: italic;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(0, 255, 0, 0.3);
+      border-radius: 50%;
+      border-top-color: #00FF00;
+      animation: spin 1s ease-in-out infinite;
+      margin: 20px auto;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+      text-align: center;
+      padding: 40px;
+      color: #FF0000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-brand">
+      <img src="images/VAIL_ProfilePicture.png" class="logo-img" alt="VAIL Logo">
+      <span class="logo-text">VAIL VML</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html#video">Home</a></li>
+        <li><a href="index.html#about">About VML</a></li>
+        <li><a href="index.html#media">Media</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#teams">Teams</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="team-details-container">
+    <div id="team-header">
+      <img id="team-logo" src="images/default-team-logo.png" alt="Team Logo">
+      <h1 id="team-name">Team Name</h1>
+    </div>
+    
+    <div class="team-stats-grid">
+      <div class="stat-card">
+        <h3>Rank</h3>
+        <p id="team-rank">-</p>
+      </div>
+      <div class="stat-card">
+        <h3>Wins</h3>
+        <p id="team-wins">-</p>
+      </div>
+      <div class="stat-card">
+        <h3>Points</h3>
+        <p id="team-points">-</p>
+      </div>
+      <div class="stat-card">
+        <h3>MMR</h3>
+        <p id="team-mmr">-</p>
+      </div>
+      <div class="stat-card" id="team-mapwins">
+        <h3>Map Wins</h3>
+        <p>0</p>
+      </div>
+    </div>
+
+    <section class="team-members">
+      <h2>Roster</h2>
+      <div id="players-container" class="no-data-message">No player data available</div>
+    </section>
+
+    <section class="recent-matches">
+      <h2>Recent Matches</h2>
+      <div id="matches-container" class="no-data-message">No match history available</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VAIL. All rights reserved.</p>
+  </footer>
+
+  <script src="team.js"></script>
+</body>
+</html>

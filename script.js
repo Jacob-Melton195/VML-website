@@ -1,4 +1,4 @@
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzWzqoEbtRupmawN4YAJJ68U6lckzN7Xz3JgtBMj9AuirPTxVIPkwftUGcya1P2vjT2/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbysxmf4X6FnGQ-hiGYXFmG79gArmRsjLCC2peW6q7KSeCRNwXroxxqHCxOP-au45VOD/exec';
 
 async function fetchTeamsData() {
   try {
@@ -26,7 +26,7 @@ function renderTeams(teams) {
   topContainer.innerHTML = `
     <!-- Second Place (Left) -->
     ${secondPlace ? `
-      <div class="team-card second-place">
+      <div class="team-card second-place" data-team-id="${secondPlace.id}">
         <div class="rank-badge">2nd</div>
         <h3>${secondPlace.name}</h3>
         <p>Wins: ${secondPlace.wins}</p>
@@ -37,7 +37,7 @@ function renderTeams(teams) {
     
     <!-- First Place (Center) -->
     ${firstPlace ? `
-      <div class="team-card first-place">
+      <div class="team-card first-place" data-team-id="${firstPlace.id}">
         <div class="rank-badge">1st</div>
         <h3>${firstPlace.name}</h3>
         <p>Wins: ${firstPlace.wins}</p>
@@ -48,7 +48,7 @@ function renderTeams(teams) {
     
     <!-- Third Place (Right) -->
     ${thirdPlace ? `
-      <div class="team-card third-place">
+      <div class="team-card third-place" data-team-id="${thirdPlace.id}">
         <div class="rank-badge">3rd</div>
         <h3>${thirdPlace.name}</h3>
         <p>Wins: ${thirdPlace.wins}</p>
@@ -60,7 +60,7 @@ function renderTeams(teams) {
 
   const tableBody = document.querySelector("#leaderboard tbody");
   tableBody.innerHTML = sortedTeams.map((team, index) => `
-    <tr>
+    <tr data-team-id="${team.id}">
       <td>${index + 1}</td>
       <td>${team.name}</td>
       <td>${team.wins}</td>
@@ -68,6 +68,22 @@ function renderTeams(teams) {
       <td>${team.mmr}</td>
     </tr>
   `).join('');
+
+  document.querySelectorAll('.team-card, #leaderboard tbody tr').forEach(element => {
+    element.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      
+      const teamName = element.querySelector('h3')?.textContent || 
+                       element.querySelector('td:nth-child(2)')?.textContent;
+      
+      if (teamName) {
+        // Encode team name for URL
+        const encodedName = encodeURIComponent(teamName.trim());
+        window.location.href = `team.html?name=${encodedName}`;
+      }
+    });
+  });
+  
 }
 
 function showErrorUI() {
@@ -86,5 +102,7 @@ function showErrorUI() {
     </tr>
   `;
 }
+
+
 
 document.addEventListener('DOMContentLoaded', fetchTeamsData);
